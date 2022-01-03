@@ -4,15 +4,17 @@ import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class UsersService {
-  private users = [{id: 0,name: 'yimu'}];
+  private users = [{id: 0,name: 'yimu'},{id: 1,name: 'yimu'},{id: 2,name: 'Dution'}];
 
-  findAllUsers(): User[] {
+  findAllUsers(name?: string): User[] {
+    if(name){
+      return this.users.filter(user => user.name === name);
+    }
     return this.users;
   }
 
-  findUserById(user_id: number): User{
-    console.log(user_id);
-    return this.users.find(({id}) => user_id === id);
+  findUserById(id: number): User{
+    return this.users.find(user => user.id === id);
   }
 
   createUser(createUserDto: CreateUserDto){
